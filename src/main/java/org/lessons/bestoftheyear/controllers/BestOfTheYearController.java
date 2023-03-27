@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -23,17 +24,26 @@ public class BestOfTheYearController {
     public String showMovies(Model model){
         String list = "";
         ArrayList<Movie> bestMovie = getBestMovies();
+
         for (Movie m : bestMovie){
             list += m.getTitle() + " ";
         }
-        model.addAttribute("movie", list);
+        model.addAttribute("movie", "list");
         return "movies";
     }
 
     @GetMapping("movies/{id}")
     public String showMovie(@PathVariable("id") int id, Model model){
         ArrayList<Movie> movies = getBestMovies();
-        model.addAttribute("movieDetail", getMusicDetail(id));
+
+        Optional<Movie> movieDetail = movies.stream().filter(m->m.getId() == id).findFirst();
+
+        if (movieDetail.isEmpty()){
+            return "redirect:/movies";
+        }else{
+            model.addAttribute("movieDetail", movieDetail.get().getTitle());
+        }
+
         return "movie";
     }
 
