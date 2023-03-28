@@ -15,20 +15,15 @@ import java.util.Optional;
 public class BestOfTheYearController {
 
     @GetMapping
-    public String showGreetings(Model model, @RequestParam(name = "personalName")String personalName){
-        model.addAttribute("myName", personalName);
+    public String showGreetings(Model model){
+        model.addAttribute("myName", "Marco");
         return "greeting";
     }
 
     @GetMapping("/movies")
     public String showMovies(Model model){
-        String list = "";
-        ArrayList<Movie> bestMovie = getBestMovies();
 
-        for (Movie m : bestMovie){
-            list += m.getTitle() + " ";
-        }
-        model.addAttribute("movie", "list");
+        model.addAttribute("movies", getBestMovies());
         return "movies";
     }
 
@@ -49,12 +44,7 @@ public class BestOfTheYearController {
 
     @GetMapping("/songs")
     public String showSongs(Model model){
-        String list = "";
-        ArrayList<Song> bestSongs = getBestSongs();
-        for (Song s : bestSongs){
-            list += s.getTitle() + " ";
-        }
-        model.addAttribute("song", list);
+        model.addAttribute("songs", getBestSongs());
         return "songs";
     }
 

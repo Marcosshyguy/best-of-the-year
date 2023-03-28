@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:insert="~{fragments :: style}">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -9,6 +9,14 @@
 </head>
 <body>
 <h2>Songs list</h2>
-<p th:text="${song}"/>
+<div class="container d-flex justify-content-center">
+    <ul >
+        <li th:each="song : ${songs}" class="border py-3 px-5">
+            <a th:text="${song.title}" class="text-center w-100">
+            </a>
+        </li>
+    </ul>
+</div>
+
 </body>
 </html>
