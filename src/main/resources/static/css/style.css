@@ -5,3 +5,8 @@ background-color:blue;
 ul{
 list-style-type: none;
 }
+
+a{
+color:white;
+cursor:pointer;
+}

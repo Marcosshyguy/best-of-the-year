@@ -8,15 +8,17 @@
     <title>Document</title>
 </head>
 <body>
+<nav th:replace="~{fragments :: navbar('songs')}"></nav>
 <h2>Songs list</h2>
 <div class="container d-flex justify-content-center">
-    <ul >
+    <ul th:if="${songs.size() != 0}">
         <li th:each="song : ${songs}" class="border py-3 px-5">
-            <a th:text="${song.title}" class="text-center w-100">
+            <a th:text="${song.title}" th:href="@{|songs/${song.id}|}" class="text-center w-100">
             </a>
         </li>
     </ul>
+    <p th:if="${songs.size() == 0}">Niente canzoni trovate</p>
 </div>
-
+<th:block th:replace="~{fragments :: bootstrapScript}"></th:block>
 </body>
 </html>
